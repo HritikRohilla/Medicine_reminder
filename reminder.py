@@ -36,14 +36,14 @@ def writeToJSONFile(Udetails, filename):
 def save_info():
 
     fileName = 'Med_details.json'
-
+#contains user details and medicine details as nested objects
     Udetails = {}
     Udetails['UserName'] = Uname.get()
     Udetails['UserHistory'] = Uhistory.get()
     Udetails['Medicines'] = data = {}
 
     
-
+#medicine data here to store as nested objects
     data['Medicine_1'] = Medicine1.get()
     data['Med1_Daily'] = Day1.get()
     data['Med1_Weekly'] = Week1.get()
