@@ -20,12 +20,12 @@ import json
 
 
 
-def writeToJSONFile(data, filename):
+def writeToJSONFile(Udetails, filename):
     with open(filename,'r+') as file:
           # First we load existing data into a dict.
         file_data = json.load(file)
         # Join data with file_data inside emp_details
-        file_data["medicine_details"].append(data)
+        file_data["medicine_details"].append(Udetails)
         # Sets file's current position at offset.
         file.seek(0)
         # convert back to json.
@@ -37,7 +37,12 @@ def save_info():
 
     fileName = 'Med_details.json'
 
-    data = {}
+    Udetails = {}
+    Udetails['UserName'] = Uname.get()
+    Udetails['UserHistory'] = Uhistory.get()
+    Udetails['Medicines'] = data = {}
+
+    
 
     data['Medicine_1'] = Medicine1.get()
     data['Med1_Daily'] = Day1.get()
@@ -64,9 +69,10 @@ def save_info():
     data['Med6_Weekly'] = Week6.get()
     data['Med6_Monthly'] = Month6.get()
 
-    writeToJSONFile(data, fileName)
+    writeToJSONFile(Udetails, fileName)
 
-
+    Uname_entry.delete(0, tkinter.END)
+    Uhistory_entry.delete(0, tkinter.END)
     Medicine1_entry.delete(0, tkinter.END)
     Day1_entry.delete(0, tkinter.END)
     Week1_entry.delete(0, tkinter.END)
@@ -102,7 +108,8 @@ heading = tkinter.Label(text="Form for Medicine", bg="grey", fg="black", width="
 heading.pack()
 
 #Labels
-
+Uname_text = tkinter.Label(text="Name * ",)
+Uhistory_text = tkinter.Label(text="Medicial history *",)
 Medicine1_text = tkinter.Label(text="Med 1 * ", )
 Day1_text = tkinter.Label(text="Day * ", )
 Week1_text = tkinter.Label(text="Week * ", )
@@ -131,36 +138,40 @@ Month6_text = tkinter.Label(text="Month * ", )
 
 #Label places for medicines and for their repetiveness 
 
-Medicine1_text.place(x=15, y=70)
-Day1_text.place(x=250, y=70)
-Week1_text.place(x=450, y=70)
-Month1_text.place(x=650, y=70)
-Medicine2_text.place(x=15, y=170)
-Day2_text.place(x=250, y=170)
-Week2_text.place(x=450, y=170)
-Month2_text.place(x=650, y=170)
-Medicine3_text.place(x=15, y=270)
-Day3_text.place(x=250, y=270)
-Week3_text.place(x=450, y=270)
-Month3_text.place(x=650, y=270)
-Medicine4_text.place(x=15, y=370)
-Day4_text.place(x=250, y=370)
-Week4_text.place(x=450, y=370)
-Month4_text.place(x=650, y=370)
-Medicine5_text.place(x=15, y=470)
-Day5_text.place(x=250, y=470)
-Week5_text.place(x=450, y=470)
-Month5_text.place(x=650, y=470)
-Medicine6_text.place(x=15, y=570)
-Day6_text.place(x=250, y=570)
-Week6_text.place(x=450, y=570)
-Month6_text.place(x=650, y=570)
+Uname_text.place(x=800, y= 120)
+Uhistory_text.place(x=800, y= 220)
+
+Medicine1_text.place(x=15, y=120)
+Day1_text.place(x=250, y=120)
+Week1_text.place(x=450, y=120)
+Month1_text.place(x=650, y=120)
+Medicine2_text.place(x=15, y=220)
+Day2_text.place(x=250, y=220)
+Week2_text.place(x=450, y=220)
+Month2_text.place(x=650, y=220)
+Medicine3_text.place(x=15, y=320)
+Day3_text.place(x=250, y=320)
+Week3_text.place(x=450, y=320)
+Month3_text.place(x=650, y=320)
+Medicine4_text.place(x=15, y=420)
+Day4_text.place(x=250, y=420)
+Week4_text.place(x=450, y=420)
+Month4_text.place(x=650, y=420)
+Medicine5_text.place(x=15, y=520)
+Day5_text.place(x=250, y=520)
+Week5_text.place(x=450, y=520)
+Month5_text.place(x=650, y=520)
+Medicine6_text.place(x=15, y=620)
+Day6_text.place(x=250, y=620)
+Week6_text.place(x=450, y=620)
+Month6_text.place(x=650, y=620)
 
 
 
 
 
-
+Uname = tkinter.StringVar()
+Uhistory = tkinter.StringVar()
 Medicine1 = tkinter.StringVar()
 Day1 = tkinter.IntVar()
 Week1 = tkinter.IntVar()
@@ -189,6 +200,8 @@ Month6 = tkinter.IntVar()
 
 #Entry fields for medicines
 
+Uname_entry = tkinter.Entry(textvariable=Uname, width="50")
+Uhistory_entry = tkinter.Entry(textvariable=Uhistory, width="50")
 Medicine1_entry = tkinter.Entry(textvariable=Medicine1, width="30")
 Day1_entry = tkinter.Entry(textvariable=Day1, width="10")
 Week1_entry = tkinter.Entry(textvariable=Week1, width="10")
@@ -218,38 +231,39 @@ Month6_entry = tkinter.Entry(textvariable=Month6, width="10")
 
 #inputbox places
 
-
-Medicine1_entry.place(x=15, y=100)
-Day1_entry.place(x=250, y=100)
-Week1_entry.place(x=450, y=100)
-Month1_entry.place(x=650, y=100)
-Medicine2_entry.place(x=15, y=200)
-Day2_entry.place(x=250, y=200)
-Week2_entry.place(x=450, y=200)
-Month2_entry.place(x=650, y=200)
-Medicine3_entry.place(x=15, y=300)
-Day3_entry.place(x=250, y=300)
-Week3_entry.place(x=450, y=300)
-Month3_entry.place(x=650, y=300)
-Medicine4_entry.place(x=15, y=400)
-Day4_entry.place(x=250, y=400)
-Week4_entry.place(x=450, y=400)
-Month4_entry.place(x=650, y=400)
-Medicine5_entry.place(x=15, y=500)
-Day5_entry.place(x=250, y=500)
-Week5_entry.place(x=450, y=500)
-Month5_entry.place(x=650, y=500)
-Medicine6_entry.place(x=15, y=600)
-Day6_entry.place(x=250, y=600)
-Week6_entry.place(x=450, y=600)
-Month6_entry.place(x=650, y=600)
+Uname_entry.place(x = 800, y = 150)
+Uhistory_entry.place(x = 800, y = 250)
+Medicine1_entry.place(x=15, y=150)
+Day1_entry.place(x=250, y=150)
+Week1_entry.place(x=450, y=150)
+Month1_entry.place(x=650, y=150)
+Medicine2_entry.place(x=15, y=250)
+Day2_entry.place(x=250, y=250)
+Week2_entry.place(x=450, y=250)
+Month2_entry.place(x=650, y=250)
+Medicine3_entry.place(x=15, y=350)
+Day3_entry.place(x=250, y=350)
+Week3_entry.place(x=450, y=350)
+Month3_entry.place(x=650, y=350)
+Medicine4_entry.place(x=15, y=450)
+Day4_entry.place(x=250, y=450)
+Week4_entry.place(x=450, y=450)
+Month4_entry.place(x=650, y=450)
+Medicine5_entry.place(x=15, y=550)
+Day5_entry.place(x=250, y=550)
+Week5_entry.place(x=450, y=550)
+Month5_entry.place(x=650, y=550)
+Medicine6_entry.place(x=15, y=650)
+Day6_entry.place(x=250, y=650)
+Week6_entry.place(x=450, y=650)
+Month6_entry.place(x=650, y=650)
 
 
 
 
 
 register = tkinter.Button(root, text="Submit Form", width="30", height="2", command=save_info, bg="grey")
-register.place(x=450, y=700)
+register.place(x=500, y=750)
 root.mainloop()
 
 
